@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Marca | IMPÉRIO STREETWEAR</title>
+  <meta name="description" content="Conheça a história e o manifesto da Império Streetwear. Moda urbana, caimento pesado, estética minimalista e identidade contemporânea.">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+
+  <!-- Barra de Anúncios -->
+  <div class="announcement-bar" id="announcementBarText">
+    FRETE GRÁTIS PARA TODO O BRASIL EM COMPRAS ACIMA DE R$ 299 • 5% OFF NO PIX
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <button class="action-btn menu-toggle-btn" aria-label="Abrir Menu" onclick="UI.toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Início</a>
+        <a href="/catalogo" class="nav-link">Catálogo</a>
+        <a href="/sobre" class="nav-link active">A Marca</a>
+        <a href="/contato" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-btn" aria-label="Sacola de Compras" onclick="Cart.openDrawer()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="institutional-content">
+      <span class="badge badge-new" style="margin-bottom: 1rem;">NOSSA HISTÓRIA</span>
+      <h1 style="font-size: clamp(2.2rem, 4vw, 3rem); text-transform: uppercase; margin-bottom: 1.5rem;">
+        IMPÉRIO STREETWEAR
+      </h1>
+
+      <p>
+        A <strong>IMPÉRIO STREETWEAR</strong> nasceu da necessidade de conectar a autenticidade das ruas com a precisão da alta costura moderna. Em um mercado saturado de produções descartáveis e modelagens sem identidade, fundamos nossa marca com um princípio inegociável: <strong>tecido pesado, acabamento impecável e estética monocromática urbana</strong>.
+      </p>
+
+      <h2>O Conceito Urban Heavyweight</h2>
+      <p>
+        Nossas camisetas não são finas nem perdem a forma na primeira lavagem. Utilizamos malhas de algodão penteado de 200g a 240g/m², golas caneladas grossas com reforço de costura ombro a ombro e corte <em>boxy/oversized</em> que assenta com firmeza no corpo, valorizando os ombros e a silhueta.
+      </p>
+
+      <h2>Estética Minimalista & Detalhes em Prata</h2>
+      <p>
+        Acreditamos no poder da sobriedade. Nossa paleta é fundamentada no preto profundo, tons de cinza carvão, off-white e reflexos prateados metálicos. Sem logos exagerados de marcas alheias: nossa identidade fala pela qualidade e pelo corte de cada peça.
+      </p>
+
+      <h2>Origem e Parcerias Transparentes</h2>
+      <p>
+        Todos os nossos produtos são selecionados e homologados junto a fornecedores têxteis e confecções industriais rigorosamente avaliados. Operamos com CNPJ registrado e ativo, garantindo emissão de nota fiscal em todas as vendas, transparência fiscal e total respeito aos direitos do consumidor.
+      </p>
+
+      <div style="margin-top: 2.5rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--silver-border); border-radius: var(--radius-xs);">
+        <h4 style="color: #FFFFFF; font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.5rem;">Compromisso Império</h4>
+        <p style="font-size: 0.85rem; margin-bottom: 0;">
+          Moda urbana independente desenvolvida com paixão, seriedade e foco na longevidade de cada produto.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container text-center" style="padding-bottom: 2rem;">
+      <p>&copy; 2026 IMPÉRIO STREETWEAR. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/ui.js"></script>
+</body>
+</html>

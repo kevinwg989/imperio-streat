@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Políticas, Termos e Trocas | IMPÉRIO STREETWEAR</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+
+  <!-- Barra de Anúncios -->
+  <div class="announcement-bar" id="announcementBarText">
+    FRETE GRÁTIS PARA TODO O BRASIL EM COMPRAS ACIMA DE R$ 299 • 5% OFF NO PIX
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Início</a>
+        <a href="/catalogo" class="nav-link">Catálogo</a>
+        <a href="/sobre" class="nav-link">A Marca</a>
+        <a href="/contato" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-btn" aria-label="Sacola de Compras" onclick="Cart.openDrawer()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="institutional-content">
+      <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); text-transform: uppercase; margin-bottom: 2rem;">
+        Termos, Entregas & Privacidade
+      </h1>
+
+      <section id="trocas">
+        <h2>1. Política de Trocas e Devoluções (CDC)</h2>
+        <p>
+          Em conformidade com o <strong>Artigo 49 do Código de Defesa do Consumidor (CDC)</strong>, você tem o direito de desistir ou solicitar a troca de qualquer produto adquirido em nossa loja virtual no prazo de <strong>até 7 (sete) dias corridos</strong> a contar da data de recebimento do pacote no endereço cadastrado.
+        </p>
+        <ul>
+          <li>A peça deve estar intacta, sem sinais de uso, lavagem ou odores.</li>
+          <li>A etiqueta original e tags devem estar afixadas ao produto.</li>
+          <li>A primeira troca por erro de numeração tem custo de frete coberto pela Império Streetwear.</li>
+        </ul>
+      </section>
+
+      <section id="entrega">
+        <h2>2. Política de Prazos e Envio</h2>
+        <p>
+          Os envios são despachados em até <strong>2 (dois) dias úteis</strong> após a confirmação do pagamento pelo gateway bancário. Nossas entregas são operadas pelos Correios e transportadoras parceiras homologadas.
+        </p>
+        <ul>
+          <li><strong>PAC Padrão:</strong> 5 a 9 dias úteis (Grátis em compras acima de R$ 299,00).</li>
+          <li><strong>SEDEX Expresso:</strong> 2 a 4 dias úteis para principais capitais.</li>
+          <li>Todos os envios contam com seguro contra extravio e código de rastreamento enviado automaticamente.</li>
+        </ul>
+      </section>
+
+      <section id="privacidade">
+        <h2>3. Política de Privacidade & Proteção de Dados (LGPD)</h2>
+        <p>
+          A Império Streetwear respeita integralmente a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD)</strong>. Os dados coletados durante sua navegação e compra (como nome, CPF, e-mail, telefone e endereço) destinam-se exclusivamente para:
+        </p>
+        <ul>
+          <li>Emissão de Nota Fiscal eletrônica conforme exigência fiscal brasileira.</li>
+          <li>Processamento do pagamento junto à instituição financeira autorizada (Mercado Pago).</li>
+          <li>Despacho e entrega da encomenda em seu endereço.</li>
+        </ul>
+        <p>
+          <strong>Segurança Bancária:</strong> Nós <strong>NUNCA</strong> armazenamos nem temos acesso aos dados completos do seu cartão de crédito ou senhas bancárias. Toda a transação ocorre em ambiente criptografado de ponta a ponta.
+        </p>
+      </section>
+
+      <section id="termos">
+        <h2>4. Termos de Compra e Produtos Demonstrativos</h2>
+        <p>
+          Itens categorizados ou com etiqueta de <em>"Demonstrativo / Catálogo"</em> tratam-se de amostras de fornecedores em fase de homologação de modelagem, gramatura e precificação. Tais itens não estão liberados para transação até a validação definitiva do estoque e custos pelo administrador da marca.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container text-center" style="padding-bottom: 2rem;">
+      <p>&copy; 2026 IMPÉRIO STREETWEAR. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/ui.js"></script>
+</body>
+</html>

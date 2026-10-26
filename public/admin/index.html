@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Painel Império Streetwear</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="/admin" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">PAINEL ADMIN</span>
+      </a>
+    </div>
+
+    <nav class="admin-nav">
+      <a href="/admin" class="admin-nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        Dashboard
+      </a>
+
+      <a href="/admin/pedidos" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+        </svg>
+        Pedidos
+      </a>
+
+      <a href="/admin/produtos" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        Produtos & Estoque
+      </a>
+
+      <a href="/" target="_blank" class="admin-nav-item" style="margin-top: auto;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        Ver Loja Virtual ↗
+      </a>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <button class="btn btn-outline btn-sm btn-block" onclick="handleAdminLogout()">
+        Encerrar Sessão
+      </button>
+    </div>
+  </aside>
+
+  <!-- Conteúdo Principal -->
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <h2 style="font-size: 1.15rem; text-transform: uppercase;">Visão Geral do E-commerce</h2>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 0.8rem; color: var(--silver-accent);">Operando em Modo de Produção / Seguro</span>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Grid de Métricas Principais -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-card-title">Faturamento Total (Pedidos Pagos)</span>
+          <div class="stat-card-value" id="dashRevenue">R$ 0,00</div>
+          <span class="stat-card-meta">Transações confirmadas</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-card-title">Total de Pedidos</span>
+          <div class="stat-card-value" id="dashTotalOrders">0</div>
+          <span class="stat-card-meta">Todos os status</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-card-title">Pedidos em Andamento</span>
+          <div class="stat-card-value" id="dashPendingOrders">0</div>
+          <span class="stat-card-meta">Pendente, Pago ou Em Separação</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-card-title">Peças no Catálogo</span>
+          <div class="stat-card-value" id="dashTotalProducts">0</div>
+          <span class="stat-card-meta"><span id="dashDemoProducts">0</span> amostras demonstrativas</span>
+        </div>
+      </div>
+
+      <!-- Alertas de Estoque Baixo -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>Alertas de Estoque Crítico (Menor ou igual a 3 unidades)</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Variação</th>
+                <th>SKU</th>
+                <th>Estoque Atual</th>
+              </tr>
+            </thead>
+            <tbody id="dashLowStockTable">
+              <!-- Preenchido via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pedidos Recentes -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>Últimos Pedidos Registrados</h3>
+          <a href="/admin/pedidos" class="btn btn-outline btn-sm">Ver Todos os Pedidos →</a>
+        </div>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Cliente</th>
+                <th>Valor Total</th>
+                <th>Status</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody id="dashRecentOrdersTable">
+              <!-- Preenchido via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

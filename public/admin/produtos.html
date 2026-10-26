@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Produtos & Estoque | Império Admin</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-header">
+      <a href="/admin" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">PAINEL ADMIN</span>
+      </a>
+    </div>
+
+    <nav class="admin-nav">
+      <a href="/admin" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Dashboard
+      </a>
+      <a href="/admin/pedidos" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line></svg>
+        Pedidos
+      </a>
+      <a href="/admin/produtos" class="admin-nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        Produtos & Estoque
+      </a>
+      <a href="/" target="_blank" class="admin-nav-item" style="margin-top: auto;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        Ver Loja Virtual ↗
+      </a>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <button class="btn btn-outline btn-sm btn-block" onclick="handleAdminLogout()">Encerrar Sessão</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <h2 style="font-size: 1.15rem; text-transform: uppercase;">Catálogo & Controle de Estoque</h2>
+      </div>
+      <div>
+        <button class="btn btn-primary btn-sm" onclick="openNewProductModal()">
+          + Cadastrar Nova Peça
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 2rem;">
+        <h4 style="font-size: 0.9rem; text-transform: uppercase; color: #fbbf24; margin-bottom: 0.35rem;">
+          💡 Diretriz de Produtos Demonstrativos
+        </h4>
+        <p style="font-size: 0.82rem; color: #fef3c7; line-height: 1.5;">
+          Produtos marcados como <strong>⚠️ Demonstrativo (Bloqueado)</strong> são exibidos na vitrine com aviso de pré-lançamento e não podem ser comprados até que você confirme fornecedor, custos e estoque. Clique no botão da coluna <em>"Status Demonstração"</em> para alternar o status a qualquer momento com apenas 1 clique.
+        </p>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>Todas as Peças Cadastradas</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Peça / Categoria</th>
+                <th>Preço / Custo</th>
+                <th>Estoque Total</th>
+                <th>Status Demonstração</th>
+                <th>Exibição</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTable">
+              <!-- Preenchido via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Criação / Edição de Produto -->
+  <div class="admin-modal-overlay" id="productFormModal">
+    <div class="admin-modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--silver-border);">
+        <h3 id="modalProductTitle" style="font-size: 1.15rem; text-transform: uppercase;">Cadastrar Peça Streetwear</h3>
+        <button onclick="closeProductModal()" style="font-size: 1.5rem; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form id="productAdminForm">
+        <input type="hidden" id="editProductId">
+
+        <div class="form-row">
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label" for="prodName">Nome do Produto *</label>
+            <input type="text" id="prodName" class="form-control" placeholder="Ex: Camiseta Oversized Acid Wash" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="prodCategory">Categoria *</label>
+            <select id="prodCategory" class="form-control" required>
+              <option value="1">Camisetas Oversized</option>
+              <option value="2">Moletons & Hoodies</option>
+              <option value="3">Calças & Cargo</option>
+              <option value="4">Tênis & Sneakers</option>
+              <option value="5">Acessórios & Bonés</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prodSupplier">Fornecedor / Origem</label>
+            <input type="text" id="prodSupplier" class="form-control" placeholder="Ex: Fornecedor Têxtil SC">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="prodPrice">Preço de Venda (R$) *</label>
+            <input type="number" step="0.01" id="prodPrice" class="form-control" placeholder="139.90" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prodComparePrice">Preço "De" (Riscado)</label>
+            <input type="number" step="0.01" id="prodComparePrice" class="form-control" placeholder="169.90">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prodCostPrice">Preço de Custo (R$)</label>
+            <input type="number" step="0.01" id="prodCostPrice" class="form-control" placeholder="55.00">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prodImages">URLs das Imagens (uma por linha)</label>
+          <textarea id="prodImages" class="form-control" rows="3" placeholder="https://images.unsplash.com/..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prodDescription">Descrição Comercial</label>
+          <textarea id="prodDescription" class="form-control" rows="3" placeholder="Modelagem ampla, algodão pesado 240g..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prodDetails">Especificações e Composição</label>
+          <textarea id="prodDetails" class="form-control" rows="2" placeholder="100% Algodão penteado, reforço ombro a ombro..."></textarea>
+        </div>
+
+        <div class="form-group" style="margin: 1.5rem 0;">
+          <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" id="prodIsDemo" style="width: 18px; height: 18px;">
+            <div>
+              <strong style="color: #fbbf24; font-size: 0.9rem;">Marcar como Produto Demonstrativo / Catálogo</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">
+                Se marcado, o produto ficará bloqueado para compra direta até que o estoque real seja homologado.
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; border-top: 1px solid var(--silver-border); padding-top: 1.25rem;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeProductModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-sm">Salvar Produto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

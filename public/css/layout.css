@@ -1,0 +1,274 @@
+/* ==========================================
+   BARRA DE ANÚNCIOS TOPO
+   ========================================== */
+.announcement-bar {
+  background: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.45rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver-accent);
+}
+
+/* ==========================================
+   HEADER PRINCIPAL
+   ========================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgba(8, 8, 8, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--silver-border);
+  transition: var(--transition);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.nav-link {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #FFFFFF;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #FFFFFF;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--text-main);
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.action-btn:hover {
+  color: var(--silver-accent);
+}
+
+.action-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+}
+
+.cart-count-badge {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  background: #FFFFFF;
+  color: #000000;
+  font-size: 0.65rem;
+  font-weight: 800;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.menu-toggle-btn {
+  display: none;
+}
+
+/* ==========================================
+   MENU MOBILE
+   ========================================== */
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 100%;
+  max-width: 300px;
+  height: 100vh;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--silver-border);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu-drawer.active {
+  transform: translateX(320px);
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.mobile-nav a {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-main);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--silver-border);
+}
+
+/* ==========================================
+   RODAPÉ PROFISSIONAL
+   ========================================== */
+.site-footer {
+  background: #050505;
+  border-top: 1px solid var(--silver-border);
+  padding: 4.5rem 0 2rem 0;
+  margin-top: 4rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+}
+
+.footer-col p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-col ul li a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-col ul li a:hover {
+  color: #FFFFFF;
+  padding-left: 4px;
+}
+
+.badge-cnpj {
+  display: inline-block;
+  background: var(--bg-card);
+  border: 1px solid var(--silver-border);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--silver-accent);
+  border-radius: var(--radius-xs);
+  margin-top: 0.5rem;
+}
+
+.payment-methods-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.payment-pill {
+  background: var(--bg-surface);
+  border: 1px solid var(--silver-border);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--silver-accent);
+  border-radius: var(--radius-xs);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--silver-border);
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+/* ==========================================
+   RESPONSIVIDADE GERAL
+   ========================================== */
+@media (max-width: 992px) {
+  .main-nav { display: none; }
+  .menu-toggle-btn { display: flex; }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  .cart-drawer {
+    max-width: 100%;
+  }
+}

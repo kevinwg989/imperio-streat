@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Seguro | IMPÉRIO STREETWEAR</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body style="background: #09090b;">
+
+  <!-- Header de Checkout Seguro -->
+  <header style="background: #000000; border-bottom: 1px solid var(--silver-border); padding: 1.25rem 0;">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-green); font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">
+        <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        Ambiente 100% Criptografado
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <form id="checkoutForm" class="checkout-grid">
+      <!-- Coluna da Esquerda: Etapas -->
+      <div>
+        <!-- Etapa 1: Identificação -->
+        <div class="checkout-step-card">
+          <div class="step-card-header">
+            <span class="step-number">1</span>
+            <h3 style="font-size: 1.05rem; text-transform: uppercase;">Identificação do Cliente</h3>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label" for="checkoutName">Nome Completo *</label>
+              <input type="text" id="checkoutName" class="form-control" placeholder="Ex: Lucas Gabriel da Silva" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="checkoutEmail">E-mail para Confirmação *</label>
+              <input type="email" id="checkoutEmail" class="form-control" placeholder="lucas@exemplo.com.br" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="checkoutCpf">CPF do Titular *</label>
+              <input type="text" id="checkoutCpf" class="form-control" placeholder="000.000.000-00" maxlength="14" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="checkoutPhone">WhatsApp / Celular com DDD *</label>
+            <input type="text" id="checkoutPhone" class="form-control" placeholder="(11) 99999-9999" maxlength="15" required>
+          </div>
+        </div>
+
+        <!-- Etapa 2: Endereço de Entrega -->
+        <div class="checkout-step-card">
+          <div class="step-card-header">
+            <span class="step-number">2</span>
+            <h3 style="font-size: 1.05rem; text-transform: uppercase;">Endereço de Entrega</h3>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="checkoutCep">CEP de Destino *</label>
+              <input type="text" id="checkoutCep" class="form-control" placeholder="00000-000" maxlength="9" required>
+              <span style="font-size: 0.72rem; color: var(--text-dim); margin-top: 2px;">Preenchimento automático do endereço via CEP</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="checkoutNumber">Número *</label>
+              <input type="text" id="checkoutNumber" class="form-control" placeholder="123" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label" for="checkoutStreet">Logradouro / Rua / Avenida *</label>
+              <input type="text" id="checkoutStreet" class="form-control" placeholder="Rua Augusta" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="checkoutNeighborhood">Bairro *</label>
+              <input type="text" id="checkoutNeighborhood" class="form-control" placeholder="Consolação" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="checkoutComplement">Complemento (Opcional)</label>
+              <input type="text" id="checkoutComplement" class="form-control" placeholder="Apto 42, Bloco B">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-bottom: 0;">
+            <div class="form-group">
+              <label class="form-label" for="checkoutCity">Cidade *</label>
+              <input type="text" id="checkoutCity" class="form-control" placeholder="São Paulo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="checkoutState">Estado (UF) *</label>
+              <input type="text" id="checkoutState" class="form-control" placeholder="SP" maxlength="2" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Etapa 3: Modalidade de Envio -->
+        <div class="checkout-step-card">
+          <div class="step-card-header">
+            <span class="step-number">3</span>
+            <h3 style="font-size: 1.05rem; text-transform: uppercase;">Modalidade de Envio</h3>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <label style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; background: var(--bg-input); border: 1px solid var(--silver-border); border-radius: var(--radius-xs); cursor: pointer;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <input type="radio" name="shippingRadio" value="PAC" checked onchange="selectShipping('PAC')">
+                <div>
+                  <strong>PAC Padrão Correios</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Entrega em 5 a 9 dias úteis</div>
+                </div>
+              </div>
+              <span id="pacPriceLabel" style="font-weight: 700;">R$ 19,90</span>
+            </label>
+
+            <label style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; background: var(--bg-input); border: 1px solid var(--silver-border); border-radius: var(--radius-xs); cursor: pointer;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <input type="radio" name="shippingRadio" value="SEDEX" onchange="selectShipping('SEDEX')">
+                <div>
+                  <strong>SEDEX Expresso</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Entrega rápida em 2 a 4 dias úteis</div>
+                </div>
+              </div>
+              <span id="sedexPriceLabel" style="font-weight: 700;">R$ 34,90</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Etapa 4: Pagamento -->
+        <div class="checkout-step-card">
+          <div class="step-card-header">
+            <span class="step-number">4</span>
+            <h3 style="font-size: 1.05rem; text-transform: uppercase;">Forma de Pagamento</h3>
+          </div>
+
+          <div class="payment-method-selector">
+            <div id="payTabPix" class="payment-tab-btn active" onclick="selectPaymentMethod('pix')">
+              <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              </svg>
+              <strong>PIX Instantâneo</strong>
+              <span>5% de Desconto</span>
+            </div>
+
+            <div id="payTabCard" class="payment-tab-btn" onclick="selectPaymentMethod('cartao_credito')">
+              <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+              <strong>Cartão de Crédito</strong>
+              <span style="color: var(--text-muted);">Até 12x no cartão</span>
+            </div>
+          </div>
+
+          <!-- Detalhes do Pix -->
+          <div id="pixDetailsSection" style="padding: 1.25rem; background: var(--bg-input); border: 1px solid var(--silver-border); border-radius: var(--radius-xs);">
+            <div style="display: flex; gap: 0.75rem; align-items: center; color: var(--accent-green); font-weight: 700; margin-bottom: 0.5rem;">
+              <span>✓ Aprovação em poucos segundos</span>
+              <span>✓ 5% de desconto automático</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--silver-accent); line-height: 1.5;">
+              Ao clicar em <strong>Finalizar Pedido</strong>, o QR Code e o código Pix Copia e Cola serão exibidos na tela para você pagar pelo aplicativo do seu banco.
+            </p>
+          </div>
+
+          <!-- Detalhes do Cartão de Crédito -->
+          <div id="cardDetailsSection" style="display: none; padding: 1.25rem; background: var(--bg-input); border: 1px solid var(--silver-border); border-radius: var(--radius-xs);">
+            <div class="form-group">
+              <label class="form-label" for="checkoutCardNumber">Número do Cartão *</label>
+              <input type="text" id="checkoutCardNumber" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="checkoutCardExpiry">Validade (MM/AA) *</label>
+                <input type="text" id="checkoutCardExpiry" class="form-control" placeholder="12/28" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="checkoutCardCvv">Código CVV *</label>
+                <input type="password" id="checkoutCardCvv" class="form-control" placeholder="123" maxlength="4">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkoutCardHolder">Nome Impresso no Cartão *</label>
+              <input type="text" id="checkoutCardHolder" class="form-control" placeholder="LUCAS G SILVA">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="checkoutInstallments">Opções de Parcelamento</label>
+              <select id="checkoutInstallments" class="form-control">
+                <option value="1">1x à vista (sem juros)</option>
+                <option value="2">2x sem juros</option>
+                <option value="3">3x sem juros</option>
+                <option value="6">6x com juros padrão</option>
+                <option value="12">12x com juros padrão</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna da Direita: Resumo do Pedido -->
+      <div>
+        <div class="order-summary-box">
+          <h3 style="font-size: 1.15rem; text-transform: uppercase; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--silver-border);">
+            Itens do Pedido
+          </h3>
+
+          <div id="checkoutSummaryItems" style="max-height: 250px; overflow-y: auto; padding-right: 0.5rem; margin-bottom: 1.25rem;">
+            <!-- Itens preenchidos via checkout.js -->
+          </div>
+
+          <div style="border-top: 1px solid var(--silver-border); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Subtotal:</span>
+              <strong id="summarySubtotal" style="color: #FFFFFF;">R$ 0,00</strong>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Entrega (Frete):</span>
+              <strong id="summaryShipping" style="color: #FFFFFF;">R$ 19,90</strong>
+            </div>
+
+            <div id="summaryDiscountRow" style="display: none; justify-content: space-between; color: var(--accent-green);">
+              <span>Desconto Pix (5%):</span>
+              <strong id="summaryDiscount">-R$ 0,00</strong>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--silver-border); padding-top: 1rem; margin-top: 0.5rem;">
+              <span style="font-size: 1.15rem; font-weight: 800; text-transform: uppercase;">Total a Pagar:</span>
+              <span id="summaryTotal" style="font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; color: #FFFFFF;">R$ 0,00</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.75rem;">
+            <button type="submit" id="checkoutSubmitBtn" class="btn btn-primary btn-block btn-lg">
+              Finalizar Pedido com Segurança
+            </button>
+          </div>
+
+          <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem; color: var(--text-dim); text-align: center;">
+            <p>🔒 Seus dados bancários nunca são armazenados em nossos servidores.</p>
+            <p>📦 Envio monitorado com código de rastreamento enviado por e-mail e WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/checkout.js"></script>
+</body>
+</html>

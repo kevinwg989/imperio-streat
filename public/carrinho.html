@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sacola de Compras | IMPÉRIO STREETWEAR</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+
+  <!-- Barra de Anúncios -->
+  <div class="announcement-bar" id="announcementBarText">
+    FRETE GRÁTIS PARA TODO O BRASIL EM COMPRAS ACIMA DE R$ 299 • 5% OFF NO PIX
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Início</a>
+        <a href="/catalogo" class="nav-link">Catálogo</a>
+        <a href="/sobre" class="nav-link">A Marca</a>
+        <a href="/contato" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/catalogo" class="btn btn-outline btn-sm">Continuar Comprando</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+    <h1 style="font-size: 2rem; text-transform: uppercase; margin-bottom: 2rem;">Sua Sacola de Compras</h1>
+
+    <div class="checkout-grid" id="fullCartLayout">
+      <!-- Tabela de Itens da Sacola -->
+      <div style="background: var(--bg-surface); border: 1px solid var(--silver-border); border-radius: var(--radius-sm); padding: 2rem;">
+        <div id="fullCartItemsContainer">
+          <!-- Renderizado via script -->
+        </div>
+      </div>
+
+      <!-- Resumo do Pedido -->
+      <div class="order-summary-box">
+        <h3 style="font-size: 1.15rem; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--silver-border);">
+          Resumo da Sacola
+        </h3>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.95rem;">
+          <span style="color: var(--text-muted);">Subtotal das Peças:</span>
+          <strong id="fullCartSubtotal" style="color: #FFFFFF;">R$ 0,00</strong>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; font-size: 0.95rem;">
+          <span style="color: var(--text-muted);">Entrega / Frete:</span>
+          <span style="font-size: 0.85rem; color: var(--silver-accent);">Calculado no checkout</span>
+        </div>
+
+        <div style="border-top: 1px solid var(--silver-border); padding-top: 1.25rem; margin-top: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem;">
+            <span style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase;">Total Estimado:</span>
+            <span id="fullCartTotal" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: #FFFFFF;">R$ 0,00</span>
+          </div>
+
+          <a href="/checkout" id="fullCartCheckoutBtn" class="btn btn-primary btn-block btn-lg">
+            Finalizar Compra
+          </a>
+
+          <p style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 1rem;">
+            Compra 100% protegida com criptografia e checkout certificado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container text-center" style="padding-bottom: 2rem;">
+      <p>&copy; 2026 IMPÉRIO STREETWEAR. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/ui.js"></script>
+  <script>
+    function renderFullCart() {
+      const container = document.getElementById('fullCartItemsContainer');
+      const subtotalEl = document.getElementById('fullCartSubtotal');
+      const totalEl = document.getElementById('fullCartTotal');
+      const checkoutBtn = document.getElementById('fullCartCheckoutBtn');
+      if (!container) return;
+
+      const cart = Cart.getCart();
+      const subtotal = Cart.getSubtotal();
+
+      if (subtotalEl) subtotalEl.textContent = API.formatBRL(subtotal);
+      if (totalEl) totalEl.textContent = API.formatBRL(subtotal);
+      if (checkoutBtn) checkoutBtn.disabled = cart.length === 0;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 4rem 1rem;">
+            <p style="font-size: 1.1rem; color: #FFFFFF; margin-bottom: 1rem;">Sua sacola está vazia.</p>
+            <a href="/catalogo" class="btn btn-primary">Ver Catálogo Streetwear</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div style="display: flex; gap: 1.5rem; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--silver-border); align-items: center;">
+          <img src="${item.image}" alt="${item.name}" style="width: 85px; height: 105px; object-fit: cover; border-radius: var(--radius-xs);">
+          <div style="flex: 1;">
+            <h3 style="font-size: 1rem; text-transform: uppercase;">${item.name}</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Tamanho: <strong>${item.size}</strong> • Cor: <strong>${item.color}</strong></p>
+            <div style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF; margin-top: 6px;">${API.formatBRL(item.price)} cada</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="Cart.updateQuantity(${item.variant_id}, ${item.quantity - 1}); renderFullCart();">−</button>
+              <span class="qty-val">${item.quantity}</span>
+              <button class="qty-btn" onclick="Cart.updateQuantity(${item.variant_id}, ${item.quantity + 1}); renderFullCart();">+</button>
+            </div>
+            <button style="font-size: 0.8rem; color: #ef4444;" onclick="Cart.removeItem(${item.variant_id}); renderFullCart();">Excluir</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', renderFullCart);
+  </script>
+</body>
+</html>

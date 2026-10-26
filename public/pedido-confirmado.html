@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido Confirmado | IMPÉRIO STREETWEAR</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+
+      <div style="font-size: 0.85rem; font-weight: 700; color: var(--silver-accent); text-transform: uppercase;">
+        Rastreamento de Pedido
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+    <div id="orderStatusContainer">
+      <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+        <p>Localizando detalhes do pedido...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container text-center" style="padding-bottom: 2rem;">
+      <p>&copy; 2026 IMPÉRIO STREETWEAR. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script>
+    function getOrderCode() {
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      if (parts.length >= 2 && parts[0] === 'pedido') {
+        return parts[1];
+      }
+      const params = new URLSearchParams(window.location.search);
+      return params.get('code') || parts[parts.length - 1];
+    }
+
+    async function loadOrderView() {
+      const code = getOrderCode();
+      const container = document.getElementById('orderStatusContainer');
+      if (!code || !container) return;
+
+      try {
+        const res = await API.getOrderByCode(code);
+        if (!res.success || !res.data) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 4rem 1rem;">
+              <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Pedido não encontrado</h2>
+              <p style="color: var(--text-muted); margin-bottom: 2rem;">Verifique o código informado ou consulte seu e-mail.</p>
+              <a href="/" class="btn btn-primary">Voltar para o Início</a>
+            </div>
+          `;
+          return;
+        }
+
+        const o = res.data;
+        const isPaid = o.status === 'pago' || o.payment_status === 'aprovado';
+        const isPix = o.payment_method === 'pix';
+        const isSandbox = o.payment?.is_sandbox;
+
+        container.innerHTML = `
+          <div class="order-success-hero">
+            <span class="badge ${isPaid ? 'badge-stock' : 'badge-demo'}" style="font-size: 0.85rem; padding: 0.5rem 1rem; margin-bottom: 1rem;">
+              Status: ${isPaid ? 'PAGAMENTO CONFIRMADO' : 'AGUARDANDO PAGAMENTO'}
+            </span>
+            <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); text-transform: uppercase;">
+              ${isPaid ? 'Pedido Recebido com Sucesso!' : 'Seu Pedido foi Gerado!'}
+            </h1>
+            <p style="font-size: 1.05rem; color: var(--silver-accent); margin-top: 0.5rem;">
+              Código do Pedido: <strong style="color: #FFFFFF; font-family: var(--font-mono);">${o.order_code}</strong>
+            </p>
+          </div>
+
+          <!-- Se for Pix e ainda não estiver pago, exibir QR Code -->
+          ${isPix && !isPaid ? `
+            <div class="pix-payment-box">
+              <h3 style="font-size: 1.25rem; text-transform: uppercase; margin-bottom: 0.5rem;">Pague com PIX Instantâneo</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Abra o app do seu banco e aponte a câmera para o QR Code abaixo ou use o Copia e Cola.
+              </p>
+
+              <div class="pix-qr-wrap">
+                <!-- QR Code SVG ilustrativo gerado dinamicamente -->
+                <svg viewBox="0 0 100 100" style="width: 100%; height: 100%;">
+                  <rect width="100" height="100" fill="#ffffff" />
+                  <rect x="10" y="10" width="25" height="25" fill="#000000" />
+                  <rect x="15" y="15" width="15" height="15" fill="#ffffff" />
+                  <rect x="18" y="18" width="9" height="9" fill="#000000" />
+                  <rect x="65" y="10" width="25" height="25" fill="#000000" />
+                  <rect x="70" y="15" width="15" height="15" fill="#ffffff" />
+                  <rect x="73" y="18" width="9" height="9" fill="#000000" />
+                  <rect x="10" y="65" width="25" height="25" fill="#000000" />
+                  <rect x="15" y="70" width="15" height="15" fill="#ffffff" />
+                  <rect x="18" y="73" width="9" height="9" fill="#000000" />
+                  <rect x="45" y="15" width="10" height="10" fill="#000000" />
+                  <rect x="45" y="35" width="10" height="20" fill="#000000" />
+                  <rect x="65" y="45" width="10" height="10" fill="#000000" />
+                  <rect x="40" y="65" width="20" height="10" fill="#000000" />
+                  <rect x="65" y="65" width="25" height="25" fill="#000000" />
+                </svg>
+              </div>
+
+              <div style="margin-bottom: 0.5rem; text-align: left;">
+                <label class="form-label">Código Pix Copia e Cola:</label>
+                <div class="copy-pix-field" id="pixCopiaColaText">${o.payment?.qr_code || '00020126580014br.gov.bcb.pix0136...'}</div>
+                <button class="btn btn-outline btn-block btn-sm" onclick="copyPixCode()">Copiar Código Pix</button>
+              </div>
+
+              ${isSandbox ? `
+                <div style="margin-top: 1.5rem; padding: 1.25rem; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-xs);">
+                  <strong style="font-size: 0.85rem; color: #60a5fa; display: block; margin-bottom: 0.35rem;">
+                    🧪 Modo Sandbox Local Detectado
+                  </strong>
+                  <p style="font-size: 0.78rem; color: #bfdbfe; margin-bottom: 1rem;">
+                    Para testar o fluxo de aprovação sem transferir dinheiro real, clique no botão abaixo. O servidor atualizará o estoque e o status para Pago.
+                  </p>
+                  <button class="btn btn-primary btn-sm" onclick="simulateSandboxPaymentClick('${o.order_code}')">
+                    Simular Aprovação de Pagamento Pix (Sandbox)
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+          ` : ''}
+
+          <!-- Detalhes do Pedido -->
+          <div style="max-width: 780px; margin: 0 auto; background: var(--bg-surface); border: 1px solid var(--silver-border); border-radius: var(--radius-sm); padding: 2rem;">
+            <h3 style="font-size: 1.15rem; text-transform: uppercase; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--silver-border);">
+              Resumo da Compra
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; font-size: 0.88rem;">
+              <div>
+                <strong style="color: #FFFFFF; display: block; margin-bottom: 4px;">Destinatário:</strong>
+                <p>${o.customer_name}</p>
+                <p>${o.customer_email}</p>
+              </div>
+              <div>
+                <strong style="color: #FFFFFF; display: block; margin-bottom: 4px;">Entrega:</strong>
+                <p>${o.shipping_city} - ${o.shipping_state}</p>
+                <p style="color: var(--silver-accent); font-weight: 600;">${o.shipping_method}</p>
+              </div>
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.88rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--silver-border); text-align: left; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">
+                  <th style="padding: 0.5rem 0;">Peça</th>
+                  <th style="padding: 0.5rem 0;">Tamanho</th>
+                  <th style="padding: 0.5rem 0; text-align: center;">Qtd</th>
+                  <th style="padding: 0.5rem 0; text-align: right;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${o.items.map(it => `
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                    <td style="padding: 0.75rem 0; font-weight: 600; color: #FFFFFF;">${it.product_name}</td>
+                    <td style="padding: 0.75rem 0; color: var(--silver-accent);">${it.variant_size} (${it.variant_color})</td>
+                    <td style="padding: 0.75rem 0; text-align: center;">${it.quantity}</td>
+                    <td style="padding: 0.75rem 0; text-align: right; font-weight: 700; color: #FFFFFF;">${API.formatBRL(it.subtotal)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+
+            <div style="border-top: 1px solid var(--silver-border); padding-top: 1rem; display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800;">
+              <span>Total do Pedido:</span>
+              <span style="color: #FFFFFF;">${API.formatBRL(o.total)}</span>
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+              <a href="/catalogo" class="btn btn-outline btn-sm">Voltar ao Catálogo</a>
+              <a href="https://wa.me/5511999999999?text=${encodeURIComponent('Olá! Gostaria de consultar o status do meu pedido ' + o.order_code)}" class="btn btn-secondary btn-sm whatsapp-dynamic-link" target="_blank">
+                Dúvidas? Fale no WhatsApp
+              </a>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        container.innerHTML = `<div style="text-align: center; padding: 4rem; color: #ef4444;">Erro ao carregar pedido.</div>`;
+      }
+    }
+
+    function copyPixCode() {
+      const text = document.getElementById('pixCopiaColaText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        UI.showToast('Código Pix copiado para a área de transferência!', 'success');
+      });
+    }
+
+    async function simulateSandboxPaymentClick(orderCode) {
+      try {
+        const res = await API.simulateSandboxPix(orderCode);
+        if (res.success) {
+          UI.showToast('Pagamento confirmado via Sandbox!', 'success');
+          setTimeout(() => loadOrderView(), 600);
+        }
+      } catch (e) {
+        UI.showToast(e.message, 'error');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOrderView);
+  </script>
+</body>
+</html>

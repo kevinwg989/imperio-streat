@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMPÉRIO STREETWEAR | Moda Urbana Premium & Underground</title>
+  <meta name="description" content="Loja oficial Império Streetwear. Peças exclusivas de moda urbana com modelagens pesadas, camisetas oversized, hoodies e calças cargo.">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+
+  <!-- Barra de Anúncios -->
+  <div class="announcement-bar" id="announcementBarText">
+    FRETE GRÁTIS PARA TODO O BRASIL EM COMPRAS ACIMA DE R$ 299 • 5% OFF NO PIX
+  </div>
+
+  <!-- Header Principal -->
+  <header class="site-header">
+    <div class="container header-container">
+      <!-- Botão Menu Mobile -->
+      <button class="action-btn menu-toggle-btn" aria-label="Abrir Menu" onclick="UI.toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Logotipo Tipográfico -->
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+
+      <!-- Menu de Navegação Desktop -->
+      <nav class="main-nav">
+        <a href="/" class="nav-link active">Início</a>
+        <a href="/catalogo" class="nav-link">Catálogo</a>
+        <a href="/catalogo?category=camisetas" class="nav-link">Camisetas</a>
+        <a href="/catalogo?category=moletons" class="nav-link">Moletons</a>
+        <a href="/catalogo?category=calcas" class="nav-link">Calças</a>
+        <a href="/catalogo?category=tenis" class="nav-link">Tênis</a>
+        <a href="/sobre" class="nav-link">A Marca</a>
+        <a href="/contato" class="nav-link">Contato</a>
+      </nav>
+
+      <!-- Ações do Cabeçalho -->
+      <div class="header-actions">
+        <a href="/catalogo" class="action-btn" aria-label="Buscar Produtos">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
+
+        <!-- Botão da Sacola / Carrinho -->
+        <button class="action-btn" aria-label="Sacola de Compras" onclick="Cart.openDrawer()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu Gaveta Mobile -->
+  <div class="drawer-backdrop" id="mobileMenuBackdrop"></div>
+  <div class="mobile-menu-drawer" id="mobileMenuDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+      <button class="drawer-close" onclick="UI.toggleMobileMenu()">&times;</button>
+    </div>
+    <nav class="mobile-nav">
+      <a href="/" onclick="UI.toggleMobileMenu()">Início</a>
+      <a href="/catalogo" onclick="UI.toggleMobileMenu()">Catálogo Completo</a>
+      <a href="/catalogo?category=camisetas" onclick="UI.toggleMobileMenu()">Camisetas Oversized</a>
+      <a href="/catalogo?category=moletons" onclick="UI.toggleMobileMenu()">Moletons & Hoodies</a>
+      <a href="/catalogo?category=calcas" onclick="UI.toggleMobileMenu()">Calças & Cargo</a>
+      <a href="/catalogo?category=tenis" onclick="UI.toggleMobileMenu()">Sneakers & Tênis</a>
+      <a href="/sobre" onclick="UI.toggleMobileMenu()">Sobre a Marca</a>
+      <a href="/contato" onclick="UI.toggleMobileMenu()">Fale Conosco</a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Banner Hero Principal -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <span class="hero-tag">DROP EXCLUSIVO • COLEÇÃO 2026</span>
+        <h1 class="hero-title">A Autêntica Moda Urbana</h1>
+        <p class="hero-subtitle">
+          Algodão pesado 240g, caimento oversized impecável e detalhes refinados em prata. Streetwear autêntico desenhado para quem dita o próprio ritmo.
+        </p>
+        <div class="hero-actions">
+          <a href="/catalogo" class="btn btn-primary btn-lg">Explorar Catálogo</a>
+          <a href="/catalogo?category=camisetas" class="btn btn-outline btn-lg">Camisetas Oversized</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de Benefícios (USP) -->
+    <section class="usp-section">
+      <div class="container usp-grid">
+        <div class="usp-item">
+          <div class="usp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <div class="usp-text">
+            <h5>Frete Grátis</h5>
+            <p>Em compras acima de R$ 299 para todo o Brasil</p>
+          </div>
+        </div>
+
+        <div class="usp-item">
+          <div class="usp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="usp-text">
+            <h5>Algodão Heavy 240g</h5>
+            <p>Tecido estruturado de alta durabilidade e toque aveludado</p>
+          </div>
+        </div>
+
+        <div class="usp-item">
+          <div class="usp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+              <line x1="2" y1="10" x2="22" y2="10"></line>
+            </svg>
+          </div>
+          <div class="usp-text">
+            <h5>Pix com 5% OFF</h5>
+            <p>Aprovação imediata ou até 3x sem juros no cartão</p>
+          </div>
+        </div>
+
+        <div class="usp-item">
+          <div class="usp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+          </div>
+          <div class="usp-text">
+            <h5>Primeira Troca Grátis</h5>
+            <p>Até 7 dias após o recebimento para trocar seu tamanho</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categorias em Destaque -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Categorias Streetwear</h2>
+            <p class="section-subtitle">Escolha seu estilo entre silhuetas clássicas e funcionais</p>
+          </div>
+          <a href="/catalogo" class="btn btn-outline btn-sm">Ver Todas →</a>
+        </div>
+
+        <div class="category-grid" id="homeCategoriesGrid">
+          <!-- Renderizado dinamicamente via main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Destaques da Coleção -->
+    <section class="section-padding" style="background: #0B0B0C; border-top: 1px solid var(--silver-border); border-bottom: 1px solid var(--silver-border);">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Destaques do Império</h2>
+            <p class="section-subtitle">As peças mais procuradas da nossa identidade urbana</p>
+          </div>
+          <a href="/catalogo" class="btn btn-outline btn-sm">Ver Catálogo Completo →</a>
+        </div>
+
+        <div class="products-grid" id="homeFeaturedGrid">
+          <!-- Renderizado dinamicamente via main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Manifesto Streetwear -->
+    <section class="container">
+      <div class="manifesto-banner">
+        <div>
+          <span class="badge badge-new" style="margin-bottom: 1rem;">MANIFESTO URBANO</span>
+          <h3>Não seguimos tendências passageiras. Criamos presença.</h3>
+          <p>
+            A Império Streetwear nasceu nas esquinas da metrópole com o compromisso de entregar moda de verdade: tecidos encorpados, costuras duplas resistentes, cortes arquitetônicos e estética minimalista com contrastes prateados.
+          </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="/sobre" class="btn btn-primary btn-sm">Conheça Nossa História</a>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div class="brand-logo" style="transform: scale(1.3); transform-origin: right center;">
+            <span class="logo-imperio">IMPÉRIO</span>
+            <span class="logo-subtitle">STREETWEAR</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Novidades e Drops -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Últimos Lançamentos</h2>
+            <p class="section-subtitle">Peças recém-chegadas ao catálogo da marca</p>
+          </div>
+          <a href="/catalogo?sort=newest" class="btn btn-outline btn-sm">Ver Todos os Drops →</a>
+        </div>
+
+        <div class="products-grid" id="homeNewGrid">
+          <!-- Renderizado dinamicamente via main.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé Profissional -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="/" class="brand-logo">
+            <span class="logo-imperio">IMPÉRIO</span>
+            <span class="logo-subtitle">STREETWEAR</span>
+          </a>
+          <p style="margin-top: 1rem;">
+            Moda urbana premium desenvolvida com respeito à cultura underground. Caimento oversized, tecidos pesados e sofisticação monocromática.
+          </p>
+          <div class="badge-cnpj">
+            CNPJ: EMPRESA REGISTRADA & ATIVA
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Coleções</h4>
+          <ul>
+            <li><a href="/catalogo?category=camisetas">Camisetas Oversized</a></li>
+            <li><a href="/catalogo?category=moletons">Moletons & Hoodies</a></li>
+            <li><a href="/catalogo?category=calcas">Calças & Cargo</a></li>
+            <li><a href="/catalogo?category=tenis">Sneakers Urbanos</a></li>
+            <li><a href="/catalogo?category=acessorios">Bolsas & Acessórios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ajuda & Suporte</h4>
+          <ul>
+            <li><a href="/politicas#trocas">Trocas e Devoluções</a></li>
+            <li><a href="/politicas#entrega">Prazos e Entregas</a></li>
+            <li><a href="/politicas#privacidade">Política de Privacidade</a></li>
+            <li><a href="/politicas#termos">Termos de Compra</a></li>
+            <li><a href="/contato">Fale Conosco</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Pagamento Seguro</h4>
+          <p style="font-size: 0.8rem;">
+            Processamento criptografado via Mercado Pago. Transações 100% seguras.
+          </p>
+          <div class="payment-methods-icons">
+            <span class="payment-pill">PIX INSTANTÂNEO</span>
+            <span class="payment-pill">CARTÃO ATÉ 12X</span>
+            <span class="payment-pill">CHECKOUT SEGURO</span>
+          </div>
+          <div style="margin-top: 1.25rem;">
+            <a href="/admin/login" style="font-size: 0.75rem; color: var(--text-dim);">Acesso Administrativo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 IMPÉRIO STREETWEAR. Todos os direitos reservados.
+        </div>
+        <div>
+          Desenvolvido com foco em alta performance e segurança.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Gaveta do Carrinho (Slide-over) -->
+  <div class="drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>Sua Sacola</h3>
+      <button class="drawer-close" onclick="Cart.closeDrawer()" aria-label="Fechar Sacola">&times;</button>
+    </div>
+    <div class="drawer-body" id="cartDrawerItems">
+      <!-- Renderizado via cart.js -->
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-summary-row">
+        <span>Subtotal:</span>
+        <strong id="cartDrawerSubtotal">R$ 0,00</strong>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem;">
+        Frete calculado na etapa de checkout.
+      </p>
+      <a href="/checkout" id="cartDrawerCheckoutBtn" class="btn btn-primary btn-block btn-lg" onclick="Cart.closeDrawer()">
+        Fechar Pedido
+      </a>
+    </div>
+  </aside>
+
+  <!-- Botão Flutuante do WhatsApp -->
+  <a href="#" class="whatsapp-float whatsapp-dynamic-link" aria-label="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 24 24">
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.25-4.29c0-4.51 3.67-8.18 8.19-8.18 2.19 0 4.24.85 5.79 2.4 1.55 1.55 2.4 3.61 2.4 5.79-.01 4.52-3.68 8.13-8.44 8.13zm4.49-6.13c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/>
+    </svg>
+  </a>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

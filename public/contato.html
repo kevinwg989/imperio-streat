@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fale Conosco | IMPÉRIO STREETWEAR</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+
+  <!-- Barra de Anúncios -->
+  <div class="announcement-bar" id="announcementBarText">
+    FRETE GRÁTIS PARA TODO O BRASIL EM COMPRAS ACIMA DE R$ 299 • 5% OFF NO PIX
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-logo">
+        <span class="logo-imperio">IMPÉRIO</span>
+        <span class="logo-subtitle">STREETWEAR</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Início</a>
+        <a href="/catalogo" class="nav-link">Catálogo</a>
+        <a href="/sobre" class="nav-link">A Marca</a>
+        <a href="/contato" class="nav-link active">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-btn" aria-label="Sacola de Compras" onclick="Cart.openDrawer()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="institutional-content">
+      <span class="badge badge-stock" style="margin-bottom: 1rem;">SUPORTE AO CLIENTE</span>
+      <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); text-transform: uppercase; margin-bottom: 1rem;">
+        Canais de Atendimento
+      </h1>
+      <p>
+        Fale diretamente com nossa equipe para tirar dúvidas sobre tamanhos, status de envio, pedidos em andamento ou parcerias.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0;">
+        <div style="background: var(--bg-card); border: 1px solid var(--silver-border); border-radius: var(--radius-sm); padding: 1.5rem;">
+          <h4 style="color: #FFFFFF; text-transform: uppercase; margin-bottom: 0.5rem;">WhatsApp Oficial</h4>
+          <p style="font-size: 0.85rem; margin-bottom: 1.25rem;">Atendimento rápido de segunda a sexta, das 09h às 18h.</p>
+          <a href="#" class="btn btn-primary btn-sm btn-block whatsapp-dynamic-link" target="_blank">
+            Chamar no WhatsApp →
+          </a>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--silver-border); border-radius: var(--radius-sm); padding: 1.5rem;">
+          <h4 style="color: #FFFFFF; text-transform: uppercase; margin-bottom: 0.5rem;">E-mail Comercial</h4>
+          <p style="font-size: 0.85rem; margin-bottom: 1.25rem;">Para dúvidas formais, notas fiscais ou trocas.</p>
+          <a href="mailto:contato@imperiostreetwear.com.br" class="btn btn-outline btn-sm btn-block">
+            contato@imperio.local
+          </a>
+        </div>
+      </div>
+
+      <h2>Envie uma Mensagem Direta</h2>
+      <form onsubmit="event.preventDefault(); UI.showToast('Mensagem enviada com sucesso! Responderemos em breve.', 'success'); this.reset();" style="margin-top: 1.5rem;">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Seu Nome</label>
+            <input type="text" class="form-control" placeholder="Lucas Silva" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Seu E-mail</label>
+            <input type="email" class="form-control" placeholder="lucas@exemplo.com.br" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Assunto</label>
+          <select class="form-control">
+            <option>Dúvida sobre Tamanho ou Peça</option>
+            <option>Status de Entrega do Pedido</option>
+            <option>Troca ou Devolução</option>
+            <option>Parceria Comercial ou Fornecedor</option>
+            <option>Outros Assuntos</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mensagem</label>
+          <textarea class="form-control" rows="5" placeholder="Como podemos te ajudar hoje?" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Enviar Mensagem</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container text-center" style="padding-bottom: 2rem;">
+      <p>&copy; 2026 IMPÉRIO STREETWEAR. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/ui.js"></script>
+</body>
+</html>
