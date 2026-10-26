@@ -293,6 +293,23 @@ async function createOrder(req, res, next) {
         'UPDATE orders SET payment_id = ?, payment_status = ?, status = ?, payment_details = ? WHERE id = ?',
         [paymentResult.payment_id, newPaymentStatus, newStatus, JSON.stringify(paymentResult), orderId]
       );
+    } else if (payment_method === 'checkout_pro' || payment_method === 'mercadopago') {
+      paymentResult = await mercadoPagoService.createCheckoutProPreference({
+        order: orderObj,
+        customer: {
+          name: customer.name,
+          email: cleanEmail,
+          cpf: cleanCpf,
+          phone: customer.phone
+        },
+        items: validatedItems,
+        shippingInfo: shippingInfo
+      });
+
+      await db.run(
+        'UPDATE orders SET payment_id = ?, payment_details = ? WHERE id = ?',
+        [paymentResult.preference_id, JSON.stringify(paymentResult), orderId]
+      );
     }
 
     res.status(201).json({

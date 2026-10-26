@@ -157,7 +157,7 @@ async function runTests() {
       const payload = {
         customer: {
           name: 'Comprador Streetwear Teste',
-          email: 'comprador@imperio.local',
+          email: 'comprador@gmail.com',
           cpf: '11144477735',
           phone: '(11) 98765-4321'
         },

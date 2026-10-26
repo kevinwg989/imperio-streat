@@ -88,8 +88,21 @@
             </p>
           </div>
 
-          <!-- Se for Pix e ainda não estiver pago, exibir QR Code -->
-          ${isPix && !isPaid ? `
+          <!-- Se for Checkout Pro e não estiver pago -->
+          ${o.payment?.init_point && !isPaid ? `
+            <div class="pix-payment-box" style="margin-bottom: 2rem;">
+              <h3 style="font-size: 1.25rem; text-transform: uppercase; margin-bottom: 0.5rem;">Pagamento Mercado Pago</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+                Conclua seu pagamento com total segurança no Mercado Pago via Pix, Cartão até 12x ou Saldo.
+              </p>
+              <a href="${o.payment.init_point}" class="btn btn-primary btn-lg btn-block" style="font-size: 0.95rem;">
+                Abrir Checkout Pro no Mercado Pago →
+              </a>
+            </div>
+          ` : ''}
+
+          <!-- Se for Pix direto e ainda não estiver pago, exibir QR Code -->
+          ${isPix && !isPaid && !o.payment?.init_point ? `
             <div class="pix-payment-box">
               <h3 style="font-size: 1.25rem; text-transform: uppercase; margin-bottom: 0.5rem;">Pague com PIX Instantâneo</h3>
               <p style="font-size: 0.85rem; color: var(--text-muted);">

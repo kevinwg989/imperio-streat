@@ -152,13 +152,22 @@
             <h3 style="font-size: 1.05rem; text-transform: uppercase;">Forma de Pagamento</h3>
           </div>
 
-          <div class="payment-method-selector">
-            <div id="payTabPix" class="payment-tab-btn active" onclick="selectPaymentMethod('pix')">
+          <div class="payment-method-selector" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+            <div id="payTabPro" class="payment-tab-btn active" onclick="selectPaymentMethod('checkout_pro')">
+              <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+              </svg>
+              <strong>Mercado Pago</strong>
+              <span style="color: #60a5fa;">Checkout Pro (Pix / Cartão 12x)</span>
+            </div>
+
+            <div id="payTabPix" class="payment-tab-btn" onclick="selectPaymentMethod('pix')">
               <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="2" width="20" height="20" rx="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               </svg>
-              <strong>PIX Instantâneo</strong>
+              <strong>PIX Direto</strong>
               <span>5% de Desconto</span>
             </div>
 
@@ -167,13 +176,24 @@
                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                 <line x1="1" y1="10" x2="23" y2="10"></line>
               </svg>
-              <strong>Cartão de Crédito</strong>
+              <strong>Cartão Transparente</strong>
               <span style="color: var(--text-muted);">Até 12x no cartão</span>
             </div>
           </div>
 
+          <!-- Detalhes do Checkout Pro -->
+          <div id="proDetailsSection" style="padding: 1.25rem; background: var(--bg-input); border: 1px solid var(--silver-border); border-radius: var(--radius-xs);">
+            <div style="display: flex; gap: 0.75rem; align-items: center; color: #60a5fa; font-weight: 700; margin-bottom: 0.5rem;">
+              <span>✓ Ambiente Oficial e Seguro Mercado Pago</span>
+              <span>✓ Pix, Cartão ou Saldo MP</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--silver-accent); line-height: 1.5;">
+              Ao clicar em <strong>Finalizar Pedido com Segurança</strong>, você será direcionado para o ambiente oficial do Mercado Pago para concluir o pagamento com total proteção contra fraudes.
+            </p>
+          </div>
+
           <!-- Detalhes do Pix -->
-          <div id="pixDetailsSection" style="padding: 1.25rem; background: var(--bg-input); border: 1px solid var(--silver-border); border-radius: var(--radius-xs);">
+          <div id="pixDetailsSection" style="display: none; padding: 1.25rem; background: var(--bg-input); border: 1px solid var(--silver-border); border-radius: var(--radius-xs);">
             <div style="display: flex; gap: 0.75rem; align-items: center; color: var(--accent-green); font-weight: 700; margin-bottom: 0.5rem;">
               <span>✓ Aprovação em poucos segundos</span>
               <span>✓ 5% de desconto automático</span>

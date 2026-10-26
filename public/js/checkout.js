@@ -1,6 +1,6 @@
 // Lógica de Checkout - IMPÉRIO STREETWEAR
 
-let currentPaymentMethod = 'pix';
+let currentPaymentMethod = 'checkout_pro';
 let selectedShippingOption = 'PAC';
 
 // Máscaras de entrada
@@ -73,12 +73,19 @@ async function lookupCep(cep) {
 function selectPaymentMethod(method) {
   currentPaymentMethod = method;
   document.querySelectorAll('.payment-tab-btn').forEach(btn => btn.classList.remove('active'));
-  const activeBtn = document.getElementById(`payTab${method === 'pix' ? 'Pix' : 'Card'}`);
+  
+  let tabId = 'payTabPro';
+  if (method === 'pix') tabId = 'payTabPix';
+  else if (method === 'cartao_credito') tabId = 'payTabCard';
+
+  const activeBtn = document.getElementById(tabId);
   if (activeBtn) activeBtn.classList.add('active');
 
+  const proDetails = document.getElementById('proDetailsSection');
   const pixDetails = document.getElementById('pixDetailsSection');
   const cardDetails = document.getElementById('cardDetailsSection');
 
+  if (proDetails) proDetails.style.display = method === 'checkout_pro' ? 'block' : 'none';
   if (pixDetails) pixDetails.style.display = method === 'pix' ? 'block' : 'none';
   if (cardDetails) cardDetails.style.display = method === 'cartao_credito' ? 'block' : 'none';
 
@@ -223,7 +230,12 @@ async function submitCheckoutOrder(e) {
     const res = await API.createOrder(orderPayload);
     if (res.success && res.data) {
       Cart.clear();
-      window.location.href = `/pedido/${res.data.order_code}`;
+      // Se for Checkout Pro e houver link do Mercado Pago, redireciona
+      if (currentPaymentMethod === 'checkout_pro' && res.data.payment && res.data.payment.init_point && !res.data.payment.is_sandbox) {
+        window.location.href = res.data.payment.init_point;
+      } else {
+        window.location.href = `/pedido/${res.data.order_code}`;
+      }
     }
   } catch (err) {
     UI.showToast(err.message || 'Falha ao finalizar o pedido. Verifique os dados.', 'error');
