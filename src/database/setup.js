@@ -5,12 +5,14 @@ const { seedDatabase } = require('./seeds');
 
 async function setup() {
   try {
-    console.log('🚀 Iniciando configuração do banco de dados SQLite...');
-    const schemaSql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf-8');
+    const schemaFile = process.env.DATABASE_URL ? 'schema.postgres.sql' : 'schema.sql';
+    const databaseType = process.env.DATABASE_URL ? 'PostgreSQL' : 'SQLite';
+    console.log(`🚀 Iniciando configuração do banco de dados ${databaseType}...`);
+    const schemaSql = fs.readFileSync(path.join(__dirname, schemaFile), 'utf-8');
     
-    // SQLite executa todo o script DDL
+    // Executa o script DDL do banco selecionado.
     await db.exec(schemaSql);
-    console.log('📄 Tabelas e índices criados com sucesso.');
+    console.log(`📄 Tabelas e índices ${databaseType} criados com sucesso.`);
 
     await seedDatabase();
     console.log('🎉 Setup do banco de dados concluído com sucesso!');

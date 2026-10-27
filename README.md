@@ -12,8 +12,8 @@ O projeto conta com arquitetura modular full-stack (HTML5, CSS3, JavaScript Vani
 | :--- | :--- |
 | **Endereço da Loja (Frontend):** | [http://localhost:3000](http://localhost:3000) |
 | **Painel Administrativo:** | [http://localhost:3000/admin](http://localhost:3000/admin) |
-| **E-mail do Administrador:** | `admin@imperio.local` (configurável no `.env`) |
-| **Senha Padrão Inicial:** | `ImperioAdmin2026!` (altere no primeiro acesso!) |
+| **E-mail do Administrador:** | Configurado por `ADMIN_EMAIL` no `.env` |
+| **Senha Inicial:** | Definida por `ADMIN_INITIAL_PASSWORD` no `.env` |
 | **Comando para Iniciar:** | `npm start` ou `npm run dev` |
 | **Comando de Testes:** | `npm test` |
 
@@ -40,7 +40,7 @@ imperio.streat/
 │   └── imperio.db            # Banco de dados SQLite persistente
 ├── src/
 │   ├── config/
-│   │   └── db.js             # Conexão e wrapper assíncrono do SQLite (WAL mode)
+│   │   └── db.js             # Camada de dados: SQLite local e PostgreSQL no Vercel
 │   ├── database/
 │   │   ├── schema.sql        # Modelagem de tabelas e índices
 │   │   ├── seeds.js          # Sementes com categorias e produtos demonstrativos
@@ -200,6 +200,34 @@ Abra o seu navegador em: **`http://localhost:3000`**
 
 - **Persistência do SQLite:** O SQLite armazena todos os dados no arquivo local `./data/imperio.db`. Em servidores virtuais dedicados (VPS, DigitalOcean, Linode, AWS EC2) ou serviços com volumes persistentes (Fly.io, Railway com volume), o SQLite é extremamente veloz, confiável e tem custo zero.
 - **Atenção para Hospedagens Efêmeras (ex: Render, Heroku básico):** Em hospedagens sem disco persistente, o sistema de arquivos é reiniciado periodicamente, o que apagaria o arquivo `.db`. Para publicar em tais ambientes, utilize um disco persistente montado na pasta `./data` ou migre a camada de dados em `src/config/db.js` para PostgreSQL (ex: Supabase, Neon ou AWS RDS).
+
+### Publicação no Vercel com Neon
+
+O arquivo `vercel.json` na raiz configura o `server.js` como uma função Node.js; o Express é exportado sem iniciar um servidor HTTP próprio. A publicação pode ser feita importando o repositório no Vercel e mantendo a raiz do projeto como diretório de trabalho.
+
+1. Crie um banco PostgreSQL no Neon e copie a **pooled connection string**.
+2. Inicialize o schema e os dados de catálogo/admin pela raiz do projeto. No PowerShell, configure a URL e as credenciais seguras do administrador e execute:
+
+   ```powershell
+   $env:DATABASE_URL = "postgresql://..."
+   $env:ADMIN_EMAIL = "seu-email"
+   $env:ADMIN_INITIAL_PASSWORD = "uma-senha-forte-e-unica"
+   npm run db:setup
+   ```
+
+   Esse comando é executado uma vez por banco. Ele cria as tabelas e os dados iniciais, inclusive o administrador. Não copia registros existentes do arquivo SQLite local.
+3. Configure no Vercel as variáveis de ambiente abaixo e faça o deploy:
+
+Configure em **Project Settings → Environment Variables**:
+
+- `NODE_ENV=production`
+- `DATABASE_URL`: pooled connection string do Neon.
+- `JWT_SECRET`: segredo aleatório com pelo menos 32 caracteres; obrigatório em produção.
+- `STORE_URL`: URL pública HTTPS do projeto, usada em notificações do Mercado Pago.
+- `MERCADO_PAGO_PUBLIC_KEY`, `MERCADO_PAGO_ACCESS_TOKEN` e, se aplicável, `MERCADO_PAGO_WEBHOOK_SECRET`.
+- `WHATSAPP_NUMBER` e outras configurações comerciais usadas pela loja.
+
+`ADMIN_EMAIL` e `ADMIN_INITIAL_PASSWORD` são usados apenas durante a inicialização do Neon; mantenha-os fora do repositório e não os adicione ao Vercel se não precisar executar o setup novamente. O SQLite continua sendo usado localmente quando `DATABASE_URL` não está definido. O arquivo SQLite existente não é migrado automaticamente para o Neon; importe dados necessários antes de direcionar tráfego de produção. Nunca publique `.env` nem credenciais em repositórios.
 
 ---
 

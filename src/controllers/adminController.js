@@ -202,7 +202,7 @@ async function listOrders(req, res, next) {
 
     if (search && search.trim()) {
       const term = `%${search.trim()}%`;
-      where.push('(order_code LIKE ? OR customer_name LIKE ? OR customer_email LIKE ? OR customer_cpf LIKE ?)');
+      where.push('(LOWER(order_code) LIKE LOWER(?) OR LOWER(customer_name) LIKE LOWER(?) OR LOWER(customer_email) LIKE LOWER(?) OR LOWER(customer_cpf) LIKE LOWER(?))');
       params.push(term, term, term, term);
     }
 
@@ -236,7 +236,7 @@ async function listOrders(req, res, next) {
 async function getOrderDetails(req, res, next) {
   try {
     const { id } = req.params;
-    const order = await db.get('SELECT * FROM orders WHERE id = ? OR order_code = ?', [id, id]);
+    const order = await db.get('SELECT * FROM orders WHERE CAST(id AS TEXT) = ? OR order_code = ?', [id, id]);
 
     if (!order) {
       return res.status(404).json({ success: false, error: 'Pedido não encontrado.' });

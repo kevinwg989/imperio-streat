@@ -100,8 +100,8 @@ app.get('/admin/pedidos', (req, res) => {
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// Inicialização
-if (process.env.NODE_ENV !== 'test') {
+// Inicialização local; no Vercel, o Express é exportado como função serverless.
+if (require.main === module && process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`\n======================================================`);
     console.log(`🔥 IMPÉRIO STREETWEAR - Servidor Ativo com Sucesso!`);

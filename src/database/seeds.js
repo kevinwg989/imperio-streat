@@ -59,6 +59,16 @@ async function seedDatabase() {
   cats.forEach(c => { catMap[c.slug] = c.id; });
 
   // 2. Administrador Padrão
+  if (
+    process.env.DATABASE_URL &&
+    (!process.env.ADMIN_EMAIL ||
+      !process.env.ADMIN_INITIAL_PASSWORD ||
+      process.env.ADMIN_EMAIL.toLowerCase() === 'admin@example.com' ||
+      /^(replace|change|your_)/i.test(process.env.ADMIN_INITIAL_PASSWORD))
+  ) {
+    throw new Error('Configure ADMIN_EMAIL e uma senha exclusiva antes de inicializar o PostgreSQL.');
+  }
+
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@imperio.local';
   const adminPass = process.env.ADMIN_INITIAL_PASSWORD || 'ImperioAdmin2026!';
   const existingAdmin = await db.get('SELECT id FROM admins WHERE email = ?', [adminEmail]);
