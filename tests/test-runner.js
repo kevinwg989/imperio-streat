@@ -114,9 +114,10 @@ async function runTests() {
 
     // Teste 5: Segurança - Bloqueio de compra de peças puramente demonstrativas
     await test('5. Segurança: Rejeição de compra de produtos demonstrativos (is_demo = 1)', async () => {
-      // Buscar um produto que seja demonstrativo
-      const demoProd = await db.get('SELECT * FROM products WHERE is_demo = 1 LIMIT 1');
-      assert(demoProd, 'Deve existir ao menos um produto demonstrativo no catálogo');
+      // Buscar um produto demo que seja ativo (is_active = 1) para garantir que
+      // a rejeição vem da regra de demonstrativo, não de inatividade
+      const demoProd = await db.get('SELECT * FROM products WHERE is_demo = 1 AND is_active = 1 LIMIT 1');
+      assert(demoProd, 'Deve existir ao menos um produto demonstrativo e ativo no catálogo');
 
       const demoVar = await db.get('SELECT * FROM product_variants WHERE product_id = ? LIMIT 1', [demoProd.id]);
 
@@ -131,6 +132,7 @@ async function runTests() {
           zip: '01310100',
           street: 'Avenida Paulista',
           number: '1000',
+          neighborhood: 'Bela Vista',
           city: 'São Paulo',
           state: 'SP'
         },

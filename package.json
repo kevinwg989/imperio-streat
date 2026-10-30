@@ -8,7 +8,8 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "db:setup": "node src/database/setup.js",
-    "test": "node tests/test-runner.js"
+    "test": "node tests/test-runner.js",
+    "vercel-build": "echo 'Build OK - Static files served by Express'"
   },
   "keywords": [
     "streetwear",

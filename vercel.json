@@ -5,14 +5,68 @@
       "src": "server.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": "public/**"
+        "includeFiles": [
+          "public/**",
+          "src/**"
+        ]
       }
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/catalogo",
+      "dest": "server.js"
+    },
+    {
+      "src": "/produto/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/carrinho",
+      "dest": "server.js"
+    },
+    {
+      "src": "/checkout",
+      "dest": "server.js"
+    },
+    {
+      "src": "/pedido/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/sobre",
+      "dest": "server.js"
+    },
+    {
+      "src": "/contato",
+      "dest": "server.js"
+    },
+    {
+      "src": "/politicas",
+      "dest": "server.js"
+    },
+    {
+      "src": "/admin",
+      "dest": "server.js"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*\\.(css|js|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf))",
+      "dest": "server.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "server.js"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
